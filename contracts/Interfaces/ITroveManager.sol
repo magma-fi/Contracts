@@ -8,7 +8,7 @@ import "./ILUSDToken.sol";
 
 
 // Common interface for the Trove Manager.
-interface ITroveManager is ILiquityBase {
+interface ITroveManager {
     
     // --- Events ---
 
@@ -37,19 +37,19 @@ interface ITroveManager is ILiquityBase {
 
     // --- Functions ---
 
-    function setAddresses(
-        address _borrowerOperationsAddress,
-        address _activePoolAddress,
-        address _defaultPoolAddress,
-        address _stabilityPoolAddress,
-        address _gasPoolAddress,
-        address _collSurplusPoolAddress,
-        address _priceFeedAddress,
-        address _lusdTokenAddress,
-        address _sortedTrovesAddress,
-        address _lqtyTokenAddress,
-        address _lqtyStakingAddress
-    ) external;
+    // function setAddresses(
+    //     address _borrowerOperationsAddress,
+    //     address _activePoolAddress,
+    //     address _defaultPoolAddress,
+    //     address _stabilityPoolAddress,
+    //     address _gasPoolAddress,
+    //     address _collSurplusPoolAddress,
+    //     address _priceFeedAddress,
+    //     address _lusdTokenAddress,
+    //     address _sortedTrovesAddress,
+    //     address _lqtyTokenAddress,
+    //     address _lqtyStakingAddress
+    // ) external;
 
     function stabilityPool() external view returns (IStabilityPool);
     function lusdToken() external view returns (ILUSDToken);
@@ -136,4 +136,9 @@ interface ITroveManager is ILiquityBase {
     function getTCR(uint _price) external view returns (uint);
 
     function checkRecoveryMode(uint _price) external view returns (bool);
+
+    function returnFromPool(address gasPoolAddress, address _liquidator, uint _LUSD) external;
+
+    function burnLUSD(address _account, uint _amount) external;
+
 }
