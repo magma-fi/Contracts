@@ -4,6 +4,8 @@ pragma solidity 0.6.11;
 
 
 contract CheckContract {
+    address constant public NATIVE_TOKEN = address(0x0);
+
     /**
      * Check that the account is an already deployed non-destroyed contract.
      * See: https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Address.sol#L12
@@ -16,4 +18,15 @@ contract CheckContract {
         assembly { size := extcodesize(_account) }
         require(size > 0, "Account code size cannot be zero");
     }
+
+    function isNativeToken(address _tokenAddress) internal pure returns (bool) {
+        return _tokenAddress == NATIVE_TOKEN;
+    }
+
+    // function isContract(address _account) internal returns (bool) {
+    //     uint256 size;
+    //     // solhint-disable-next-line no-inline-assembly
+    //     assembly { size := extcodesize(_account) }
+    //     return size > 0;
+    // }
 }
